@@ -50,9 +50,16 @@ button {
 /* Romantic Section */
 .romantic {
   display: none;
-  animation: fadeIn 2s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  animation: fadeIn 1s ease-in-out;
   padding: 20px;
+  background: radial-gradient(circle at top, #ff5e9c, #7b2ff7);
 }
+
 
 @keyframes fadeIn {
   from {opacity: 0;}
@@ -97,6 +104,17 @@ button {
   from {transform: translateY(100vh); opacity: 1;}
   to {transform: translateY(-10vh); opacity: 0;}
 }
+.topFinalGif {
+  width: 220px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.7);
+  margin-top: 0 !important;
+}
+
+
 
 img {
   width: 300px;
@@ -110,16 +128,24 @@ img {
 
 <body>
 
-<h1 id="question">Will you be my valentine, phlower? ❤️</h1>
+<div id="choiceSection">
 
-<div class="buttons">
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 💔</button>
+  <h1 id="question">Will you be my valentine, nishu? 💖</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+
+  <div id="noGifContainer" style="margin-top:40px;"></div>
+
 </div>
-<div id="noGifContainer" style="margin-top:40px;"></div>
+
 
 <div class="romantic" id="romanticPage">
-  <div class="glowName">PHLOWER //-//</div>
+  <img id="topRomanticGif" src="https://c.tenor.com/Mipg1P0TC4YAAAAd/tenor.gif" class="topFinalGif">
+
+  <div class="glowName">CUTU //-//</div>
   <div id="loveLetter"></div>
   <img src="https://c.tenor.com/l22aMnkPFO0AAAAd/tenor.gif">
 </div>
@@ -183,12 +209,14 @@ noBtn.addEventListener("click", () => {
   }
 
   noGifContainer.innerHTML = `
-    <img src="${gifLink}" 
-         style="width:250px; max-width:80%; border-radius:15px; margin-top:20px;">
-  `;
+  <img src="${gifLink}" 
+       id="noDynamicGif"
+       style="width:250px; max-width:80%; border-radius:15px; margin-top:20px;">
+`;
+
 
   // Continue original chaos
-  noSize -= 0.15;
+  noSize -= 0.12;
   yesSize += 0.15;
 
   noBtn.style.transform = `scale(${noSize})`;
@@ -198,7 +226,7 @@ noBtn.addEventListener("click", () => {
   noBtn.style.left = Math.random() * 80 + "vw";
   noBtn.style.top = Math.random() * 80 + "vh";
 
-  if (noClicks >= 7) {
+  if (noClicks >= 5) {
     noBtn.style.display = "none";
     question.innerText = "Don't play hard to get bbg. You only have one choice and you know it 😌";
   }
@@ -207,13 +235,30 @@ noBtn.addEventListener("click", () => {
 
 /* YES BUTTON */
 yesBtn.addEventListener("click", () => {
-  document.querySelector(".buttons").style.display = "none";
-  question.style.display = "none";
+
+  // Hide first screen
+  let choiceSection = document.getElementById("choiceSection");
+  if (choiceSection) {
+    choiceSection.style.display = "none";
+  }
+
+  // Force reset the romantic top GIF
+  let topGif = document.getElementById("topRomanticGif");
+  if (topGif) {
+    topGif.src = "https://c.tenor.com/Mipg1P0TC4YAAAAd/tenor.gif";
+  }
+
   romanticPage.style.display = "block";
+
   loveSong.play();
   launchConfetti();
   startTypewriter();
 });
+
+
+
+
+
 
 /* Confetti */
 function launchConfetti() {
@@ -264,3 +309,6 @@ function startTypewriter() {
 
 </body>
 </html>
+
+
+
