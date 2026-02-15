@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background: radial-gradient(circle at top, #ff5e9c, #7b2ff7);
+  color: white;
+}
+
+/* Initial Question */
+h1 {
+  margin-top: 20vh;
+  font-size: 2.5em;
+  padding: 0 20px;
+}
+
+.buttons {
+  margin-top: 40px;
+}
+
+button {
+  padding: 15px 35px;
+  font-size: 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 10px;
+  position: relative;
+}
+
+#yesBtn {
+  background: #00ffb3;
+  color: black;
+  font-weight: bold;
+}
+
+#noBtn {
+  background: #ff4d6d;
+  color: white;
+}
+
+/* Romantic Section */
+.romantic {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  animation: fadeIn 1s ease-in-out;
+  padding: 20px;
+  background: radial-gradient(circle at top, #ff5e9c, #7b2ff7);
+}
+
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.glowName {
+  font-size: 3em;
+  margin-top: 5vh;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff1a8c;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 40px #ff66b3, 0 0 60px #ff3399;
+  }
+}
+
+#loveLetter {
+  margin-top: 30px;
+  font-size: 1.3em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 120px;
+  border-right: 3px solid white;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from {transform: translateY(100vh); opacity: 1;}
+  to {transform: translateY(-10vh); opacity: 0;}
+}
+.topFinalGif {
+  width: 220px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.7);
+  margin-top: 0 !important;
+}
+
+
+
+img {
+  width: 300px;
+  max-width: 80%;
+  border-radius: 20px;
+  margin-top: 30px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.7);
+}
+</style>
+</head>
+
+<body>
+
+<div id="choiceSection">
+
+  <h1 id="question">Will you be my valentine, phlower hehehe? :heart:</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 💔</button>
+  </div>
+
+  <div id="noGifContainer" style="margin-top:40px;"></div>
+
+</div>
+
+
+<div class="romantic" id="romanticPage">
+  <img id="topRomanticGif" src="https://c.tenor.com/Mipg1P0TC4YAAAAd/tenor.gif" class="topFinalGif">
+
+  <div class="glowName">PHLOWER //-//</div>
+  <div id="loveLetter"></div>
+  <img src="https://c.tenor.com/l22aMnkPFO0AAAAd/tenor.gif">
+</div>
+
+<audio id="loveSong" src="song.mp3"></audio>
+<audio id="boingSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+<audio id="booSound" src="boo.mp3"></audio>
+
+<script>
+let noBtn = document.getElementById("noBtn");
+let yesBtn = document.getElementById("yesBtn");
+let question = document.getElementById("question");
+let romanticPage = document.getElementById("romanticPage");
+let loveSong = document.getElementById("loveSong");
+let boing = document.getElementById("boingSound");
+let boo = document.getElementById("booSound");
+let loveLetterDiv = document.getElementById("loveLetter");
+
+let noClicks = 0;
+let noSize = 1;
+let yesSize = 1;
+
+/* Floating Hearts */
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+/* No Button Chaos */
+noBtn.addEventListener("click", () => {
+  noClicks++;
+  boing.play();
+  boo.currentTime = 0;
+  boo.play();
+
+  let noGifContainer = document.getElementById("noGifContainer");
+
+  // Escalating GIF reactions
+  let gifLink = "";
+
+  if (noClicks === 1) {
+    gifLink = "https://c.tenor.com/EV-OQL03ieIAAAAd/tenor.gif";
+  } 
+  else if (noClicks === 2) {
+    gifLink = "https://c.tenor.com/Iz0VY8qjc4MAAAAd/tenor.gif";
+  } 
+  else if (noClicks === 3) {
+    gifLink = "https://c.tenor.com/5a43adTKM_kAAAAd/tenor.gif";
+  } 
+  else if (noClicks === 4) {
+    gifLink = "https://c.tenor.com/YS2hbVD4hGIAAAAd/tenor.gif";
+  } 
+  else {
+    gifLink = "https://c.tenor.com/eh9zssWhHE0AAAAd/tenor.gif";
+  }
+
+  noGifContainer.innerHTML = `
+  <img src="${gifLink}" 
+       id="noDynamicGif"
+       style="width:250px; max-width:80%; border-radius:15px; margin-top:20px;">
+`;
+
+
+  // Continue original chaos
+  noSize -= 0.12;
+  yesSize += 0.15;
+
+  noBtn.style.transform = `scale(${noSize})`;
+  yesBtn.style.transform = `scale(${yesSize})`;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * 80 + "vw";
+  noBtn.style.top = Math.random() * 80 + "vh";
+
+  if (noClicks >= 5) {
+    noBtn.style.display = "none";
+    question.innerText = "Don't play hard to get bbg. You only have one choice and you know it 😌";
+  }
+});
+
+
+/* YES BUTTON */
+yesBtn.addEventListener("click", () => {
+
+  // Hide first screen
+  let choiceSection = document.getElementById("choiceSection");
+  if (choiceSection) {
+    choiceSection.style.display = "none";
+  }
+
+  // Force reset the romantic top GIF
+  let topGif = document.getElementById("topRomanticGif");
+  if (topGif) {
+    topGif.src = "https://c.tenor.com/Mipg1P0TC4YAAAAd/tenor.gif";
+  }
+
+  romanticPage.style.display = "block";
+
+  loveSong.play();
+  launchConfetti();
+  startTypewriter();
+});
+
+
+
+
+
+
+/* Confetti */
+function launchConfetti() {
+  for (let i = 0; i < 120; i++) {
+    let confetti = document.createElement("div");
+    confetti.innerText = "✨";
+    confetti.style.position = "absolute";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = "-10px";
+    confetti.style.fontSize = "20px";
+    confetti.style.animation = "fall 3s linear forwards";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+let style = document.createElement('style');
+style.innerHTML = `
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}`;
+document.head.appendChild(style);
+
+/* TYPEWRITER LOVE LETTER */
+const letterText = `From the moment you came into my life,
+everything started feeling softer, brighter, warmer.
+
+You are my peace, my chaos, my favorite notification,
+and the reason I smile at my phone like an idiot.
+
+I don't just want you for Valentine's Day.
+I want you for all my life.
+
+I love you <3`;
+
+function startTypewriter() {
+  let i = 0;
+  function type() {
+    if (i < letterText.length) {
+      loveLetterDiv.innerHTML += letterText.charAt(i);
+      i++;
+      setTimeout(type, 110);
+    }
+  }
+  type();
+}
+</script>
+
+</body>
+</html>
+
+
+
